@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+    <html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <title>Index</title>
+        <link rel="stylesheet" href="css\styles.css">
+    </head>
+    <body>
+        <header>
+            <img src="img\milogo.jpg" alt="Logo de Mi Página Web">
+            <nav>
+                <a href="inicio.html">Inicio</a>
+                <a href="contacto.html">Contacto</a>
+            </nav>
+        </header>
+    
+        <main>
+            <h2>Cuerpo</h2>
+            <p>Fecha de hoy: <input type="date" value="2023-09-13"></p>
+
+            <h3>Tabla</h3>
+            <table>
+                <tr>
+                    <th>Encabezado 1</th>
+                    <th>Encabezado 2</th>
+                </tr>
+                <tr>
+                    <td>Dato 1</td>
+                    <td>Dato 2</td>
+                </tr>
+                <tr>
+                    <td>Dato 3</td>
+                    <td>Dato 4</td>
+                </tr>
+            </table>
+
+            <h3>Imágenes</h3>
+            <img src="img/imagen1.jpg" alt="Imagen 1">
+            <img src="img/imagen2.jpg" alt="Imagen 2">
+
+            <h3>Formulario</h3>
+            <form action="mailto:correofalso@gmail.com" method="post" enctype="text/plain">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre">
+
+                <label for="correo">Correo electrónico:</label>
+                <input type="email" id="correo" name="correo">
+
+                <label for="mensaje">Mensaje:</label>
+                <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+
+                <button type="submit" value="Enviar">Enviar</button>
+            </form>
+        </main>
+
+        <footer>
+            <p>Cristina Rollan &copy; 2023</p>
+        </footer>
+    </body>
+</html>
+
