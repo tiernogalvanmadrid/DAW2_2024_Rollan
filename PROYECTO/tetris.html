@@ -18,17 +18,38 @@
 
   canvas {
     border: 1px solid white;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px), 
+        linear-gradient(90deg, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  #gameContainer {
+    display: flex;
+    align-items: flex-start;
+  }
+
+  #game {
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+  #nextPiece {
+    border: 1px solid white;
+    width: 100px;
+    height: 100px;
   }
   </style>
 </head>
 <body>
-<canvas width="320" height="640" id="game"></canvas>
+<div id="gameContainer">
+  <div id="nextPiece"></div>
+  <canvas width="320" height="640" id="game"></canvas>
+</div>
 <script>
-    
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
-
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
@@ -42,7 +63,6 @@ function generateSequence() {
   }
 }
 
-// obtener el siguiente tetrominó en la secuencia
 function getNextTetromino() {
   if (tetrominoSequence.length === 0) {
     generateSequence();
@@ -51,21 +71,17 @@ function getNextTetromino() {
   const name = tetrominoSequence.pop();
   const matrix = tetrominos[name];
 
-  // I y O comienzan centrados, todos los demás comienzan en el centro izquierdo
   const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
-
-  // Comienzo en la fila 21 (-1), todos los demás comienzan en la fila 22 (-2)
   const row = name === 'I' ? -1 : -2;
 
   return {
-    name: name,      // nombre de la pieza (L, O, etc.)
-    matrix: matrix,  // la matriz de rotación actual
-    row: row,        // fila actual (comienza fuera de la pantalla)
-    col: col         // col actual
+    name: name,
+    matrix: matrix,
+    row: row,
+    col: col
   };
 }
 
-// rotar una matriz NxN 90 grados
 function rotate(matrix) {
   const N = matrix.length - 1;
   const result = matrix.map((row, i) =>
@@ -75,16 +91,13 @@ function rotate(matrix) {
   return result;
 }
 
-// compruebe si la nueva matriz/fila/col es válida
 function isValidMove(matrix, cellRow, cellCol) {
   for (let row = 0; row < matrix.length; row++) {
     for (let col = 0; col < matrix[row].length; col++) {
       if (matrix[row][col] && (
-          // fuera de los límites del juego
           cellCol + col < 0 ||
           cellCol + col >= playfield[0].length ||
           cellRow + row >= playfield.length ||
-          // choca con otra pieza
           playfield[cellRow + row][cellCol + col])
         ) {
         return false;
@@ -95,27 +108,20 @@ function isValidMove(matrix, cellRow, cellCol) {
   return true;
 }
 
-// Coloca la tetromino en el campo de juego
 function placeTetromino() {
   for (let row = 0; row < tetromino.matrix.length; row++) {
     for (let col = 0; col < tetromino.matrix[row].length; col++) {
       if (tetromino.matrix[row][col]) {
-
-        // El juego termina si la pieza tiene alguna parte fuera de la pantalla
         if (tetromino.row + row < 0) {
           return showGameOver();
         }
-
         playfield[tetromino.row + row][tetromino.col + col] = tetromino.name;
       }
     }
   }
 
-  // verifica que la línea esté despejada comenzando desde abajo y avanzando hacia arriba
   for (let row = playfield.length - 1; row >= 0; ) {
     if (playfield[row].every(cell => !!cell)) {
-
-      // suelta cada fila encima de esta
       for (let r = row; r >= 0; r--) {
         for (let c = 0; c < playfield[r].length; c++) {
           playfield[r][c] = playfield[r-1][c];
@@ -128,9 +134,13 @@ function placeTetromino() {
   }
 
   tetromino = getNextTetromino();
+  isSaved = false;
+  tetrominoPlacedCount++; // Incrementa el contador de piezas colocadas
+  if (tetrominoPlacedCount % 1 === 0) {
+    increaseSpeed(); // Incrementa la velocidad cada 1 pieza colocada
+  }
 }
 
-// Muestra la pantalla de fin del juego
 function showGameOver() {
   cancelAnimationFrame(rAF);
   gameOver = true;
@@ -147,25 +157,41 @@ function showGameOver() {
   context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
 }
 
+function drawSavedPiece(piece) {
+  const savedPieceCanvas = document.createElement('canvas');
+  savedPieceCanvas.width = 100;
+  savedPieceCanvas.height = 100;
+  const savedPieceContext = savedPieceCanvas.getContext('2d');
+
+  savedPieceContext.fillStyle = colors[piece];
+  for (let row = 0; row < tetrominos[piece].length; row++) {
+    for (let col = 0; col < tetrominos[piece][row].length; col++) {
+      if (tetrominos[piece][row][col]) {
+        savedPieceContext.fillRect(col * grid, row * grid, grid, grid);
+      }
+    }
+  }
+
+  const nextPieceElement = document.getElementById('nextPiece');
+  nextPieceElement.innerHTML = '';
+  nextPieceElement.appendChild(savedPieceCanvas);
+}
+
 const canvas = document.getElementById('game');
 const context = canvas.getContext('2d');
 const grid = 32;
 const tetrominoSequence = [];
+let savedPiece = null;
+let isSaved = false;
 
-// Realiza un seguimiento de lo que hay en cada celda del juego usando una matriz 2D
-// El campo de juego de Tetris es de 10x20, con algunas filas fuera de la pantalla
 const playfield = [];
-
-// poblar el estado vacío
 for (let row = -2; row < 20; row++) {
   playfield[row] = [];
-
   for (let col = 0; col < 10; col++) {
     playfield[row][col] = 0;
   }
 }
 
-// cómo dibujar cada tetromino
 const tetrominos = {
   'I': [
     [0,0,0,0],
@@ -204,7 +230,6 @@ const tetrominos = {
   ]
 };
 
-// color de cada tetromino
 const colors = {
   'I': 'cyan',
   'O': 'yellow',
@@ -217,36 +242,36 @@ const colors = {
 
 let count = 0;
 let tetromino = getNextTetromino();
-let rAF = null;  // realizar un seguimiento del cuadro de animación para que podamos cancelarlo
+let rAF = null;
 let gameOver = false;
+let tetrominoPlacedCount = 0;
+let speed = 60;
 
-// bucle de juego
+function increaseSpeed() {
+  if (speed > 1) {
+    speed--;
+  }
+}
+
 function loop() {
   rAF = requestAnimationFrame(loop);
   context.clearRect(0,0,canvas.width,canvas.height);
 
-  // dibujar el campo de juego
   for (let row = 0; row < 20; row++) {
     for (let col = 0; col < 10; col++) {
       if (playfield[row][col]) {
         const name = playfield[row][col];
         context.fillStyle = colors[name];
-
-        // dibujar 1 px más pequeño que la cuadrícula crea un efecto de cuadrícula
         context.fillRect(col * grid, row * grid, grid-1, grid-1);
       }
     }
   }
 
-  // dibuja el tetromino activo
   if (tetromino) {
-
-    // El tetromino cae cada 35 cuadros
-    if (++count > 35) {
+    if (++count > speed) {
       tetromino.row++;
       count = 0;
 
-      // Coloque la pieza si choca con algo.
       if (!isValidMove(tetromino.matrix, tetromino.row, tetromino.col)) {
         tetromino.row--;
         placeTetromino();
@@ -258,8 +283,6 @@ function loop() {
     for (let row = 0; row < tetromino.matrix.length; row++) {
       for (let col = 0; col < tetromino.matrix[row].length; col++) {
         if (tetromino.matrix[row][col]) {
-
-          // dibujar 1 px más pequeño que la cuadrícula crea un efecto de cuadrícula
           context.fillRect((tetromino.col + col) * grid, (tetromino.row + row) * grid, grid-1, grid-1);
         }
       }
@@ -267,22 +290,16 @@ function loop() {
   }
 }
 
-// Listener para mover el tetromino activo.
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
 
-  // teclas de flecha izquierda y derecha (mover)
   if (e.which === 37 || e.which === 39) {
-    const col = e.which === 37
-      ? tetromino.col - 1
-      : tetromino.col + 1;
-
+    const col = e.which === 37 ? tetromino.col - 1 : tetromino.col + 1;
     if (isValidMove(tetromino.matrix, tetromino.row, col)) {
       tetromino.col = col;
     }
   }
 
-  // Tecla de flecha hacia arriba (girar)
   if (e.which === 38) {
     const matrix = rotate(tetromino.matrix);
     if (isValidMove(matrix, tetromino.row, tetromino.col)) {
@@ -290,22 +307,41 @@ document.addEventListener('keydown', function(e) {
     }
   }
 
-  // tecla de flecha hacia abajo (soltar)
-  if(e.which === 40) {
+  if (e.which === 40) {
     const row = tetromino.row + 1;
-
     if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
       tetromino.row = row - 1;
-
       placeTetromino();
       return;
     }
-
     tetromino.row = row;
+  }
+
+  if (e.which === 67 && !isSaved) {
+    if (savedPiece !== null) {
+      const temp = tetromino.name;
+      tetromino = { name: savedPiece, matrix: tetrominos[savedPiece], row: tetromino.row, col: tetromino.col };
+      savedPiece = temp;
+    } else {
+      savedPiece = tetromino.name;
+      tetromino = getNextTetromino();
+    }
+    drawSavedPiece(savedPiece);
+    isSaved = true;
   }
 });
 
-// comenzar el juego
+document.addEventListener('keydown', function(e) {
+  if (gameOver) return;
+
+  if (e.which === 32) {
+    while (isValidMove(tetromino.matrix, tetromino.row + 1, tetromino.col)) {
+      tetromino.row++;
+    }
+    placeTetromino();
+  }
+});
+
 rAF = requestAnimationFrame(loop);
 </script>
 </body>
