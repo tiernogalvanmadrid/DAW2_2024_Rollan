@@ -37,7 +37,7 @@ try {
     <!-- <link rel="stylesheet" href="style\style.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 
-    <title>Area personal</title>
+    <title>Personal Area</title>
 </head>
 <body>
     
@@ -50,8 +50,8 @@ try {
             <thead>
             <tr>
                 <th>#</th>
-                <th>Puntuaje Total</th>
-                <th>Fecha</th>
+                <th>Total Score</th>
+                <th>Date</th>
             </tr>
             </thead>
             <tbody>
@@ -65,7 +65,7 @@ try {
             </tbody>
         </table>
     </div>
-    <a href="tetris.php" class="btn btn-primary">Jugar</a>
+    <a href="tetris.php" class="btn btn-primary">Play</a>
 </div>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
