@@ -1,333 +1,67 @@
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-    
-    if (empty($username) || empty($password)) {
-        $error = "Por favor, completa todos los campos.";
-    } else {
-        $dsn = "mysql:host=localhost;dbname=tetris";
-        $db_username = "CrisRollan";
-        $db_password = "667940995cR!";
-
-        try {
-          $pdo = new PDO($dsn, $db_username, $db_password);
-          
-          $stmt = $pdo->prepare("SELECT * FROM usuario WHERE nombre_usuario = ?");
-          $stmt->execute([$username]);
-          $user = $stmt->fetch();
-          
-          if ($username == $user['nombre_usuario'] && $password == $user['contrasenia']){
-                session_start();
-                var_dump($_SESSION);
-                $_SESSION["username"] = $username;
-                header("Location: tetris.html");
-                exit();
-            } else {
-                $error = "Usuario o contraseña incorrectos.";
-                echo "Usuario o contraseña incorrectos.";
-            }
-        } catch (PDOException $e) {
-            echo "Error: " . $e->getMessage();
-        }
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en" >
   <head>
     <meta charset="UTF-8">
     <title>Tetris Game</title>
     <link rel="stylesheet" href="style\style.css">
-    
+
   </head>
   <body>
     <section>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <form action= "<?php $_SERVER['PHP_SELF']?>" method= "post">
+    <?php
+      $num_squares = 700; // Define el número de cuadrados
+      for ($i = 0; $i < $num_squares; $i++) {
+        echo '<span></span>';
+      }
+    ?>
       <div class="signin">
         <div class="content">
           <h2>Sign In</h2>
           <div class="form">
             <div class="inputBox">
-              <input type="text" name="username" required>
-              <i>Username</i>
+              <input type="email" id="email" required>
+              <i>Email</i>
             </div>
             <div class="inputBox">
-              <input type="password" name="password" required>
+              <input type="password" id="password" required>
               <i>Password</i>
             </div>
             <div class="links">
               <a href="reset_password.php">Forgot Password</a>
-              <a href="registro.php">Signup</a>
+              <a href="registro.php">Sign up</a>
             </div>
             <div class="inputBox">
-              <input type="submit" value="Login">
+              <input type="submit" value="Log in" onclick="submitForm()">            
             </div>
-          </form>
           </div>
         </div>
       </div>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
-    <span></span>
   </section>
+  <script>
+    function submitForm() {
+    var email = document.getElementById("email").value;
+    var password = document.getElementById("password").value;
+
+    // Crear un objeto FormData para enviar los datos
+    var formData = new FormData();
+    formData.append('email', email);
+    formData.append('password', password);
+
+    // Crear una solicitud AJAX para enviar los datos a un script PHP
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'procesar_index.php', true);
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            // Manejar la respuesta del servidor si es necesario
+            if (xhr.responseText.trim() === "OK") {
+              window.location.href = "usuario.php";
+            } else {
+              alert("Usuario o contraseña incorrectos.")
+            }
+        }
+    };
+    xhr.send(formData);
+}
+</script>
 </body>
 </html>

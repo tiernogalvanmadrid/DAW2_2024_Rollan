@@ -95,6 +95,11 @@ section .signin .content h2
 	color: #00ffff;
 	text-transform: uppercase;
 }
+section .signin .content h5 
+{
+	color: #00ffff;
+	text-transform: uppercase;
+}
 section .signin .content .form 
 {
 	width: 100%;
