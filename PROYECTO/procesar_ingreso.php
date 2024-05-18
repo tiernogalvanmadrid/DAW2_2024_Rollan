@@ -1,8 +1,8 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST["username"];
-    $email = $_POST["email"];
-    $password = MD5($_POST["password"]);
+    $username = cleanInput($_POST["username"]);
+    $email = cleanInput($_POST["email"]);
+    $password = cleanInput(MD5($_POST["password"]));
     try {
         require_once('constantes.php');
 
@@ -34,5 +34,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } catch (PDOException $e) {
         echo "error: " . $e->getMessage();
     }
+}
+
+
+function cleanInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    
+    return $data;
 }
 ?>

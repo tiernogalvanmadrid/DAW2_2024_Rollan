@@ -49,6 +49,17 @@
         </div>
     </section>
     <script>
+    function validateEmail(email) {
+        var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        return re.test(email);
+    }
+
+    function validateDomain(email) {
+        var validDomains = ["gmail.com", "yahoo.com", "yahoo.es", "hotmail.com", "hotmail.es", "outlook.com", "educa.madrid.org"]; // Agrega los dominios válidos aquí
+        var domain = email.split('@')[1];
+        return validDomains.includes(domain);
+    }
+
     function submitForm() {
         var username = document.getElementById("username").value;
         var email = document.getElementById("email").value;
@@ -62,12 +73,24 @@
             return;
         }
 
+        // Validar formato del email
+        if (!validateEmail(email)) {
+            alert("Por favor, introduzca un email válido.");
+            return;
+        }
+
+        // Validar que el dominio del email sea válido
+        if (!validateDomain(email)) {
+            alert("Por favor, introduzca un email con un dominio válido.");
+            return;
+        }
+
         // Validar que las contraseñas coincidan
         if (password !== confirmPassword) {
             alert("Las contraseñas no coinciden.");
             return;
         }
-        
+
         // Crear un objeto FormData para enviar los datos
         var formData = new FormData();
         formData.append('username', username);

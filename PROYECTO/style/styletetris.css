@@ -40,19 +40,16 @@ html, body {
   #nextPiece {
     width: 100px;
     height: 100px;
-    /* Añadimos una regla para mantener el aspecto original */
-    aspect-ratio: 1 / 1;
     margin-top: 65px;
   }
 
   .hold-text, .next-text {
     color: white;
     font-size: 20px;
-    margin-bottom: 10px;
     position: absolute;
   }
   .hold-text {
-    margin-left: 3%;
+    margin-left: 24%;
   }
 
   .next-text {
@@ -66,8 +63,41 @@ html, body {
     font-size: 20px;
     position: absolute;
     bottom: 20px;
-    right: 25%;
   }
   .col {
     align-items: center;
   }
+
+
+
+
+/* Estilos para los controles móviles */
+#controls {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    #controls {
+        display: flex;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 10px;
+        width: 100%;
+    }
+}
+
+#controls button {
+    padding: 10px;
+    font-size: 16px;
+    flex: 1;
+    margin: 0 5px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+}
+
+#controls button:active {
+    background-color: #555;
+}
+/* Estilos para los controles móviles */

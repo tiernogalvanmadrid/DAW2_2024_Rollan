@@ -357,9 +357,63 @@ function updateScoreUI() {
     scoreElement.textContent = 'Score: ' + score;
 }
 
+
+// Eventos de los botones para controles móviles
+document.getElementById('save-piece').addEventListener('click', function() {
+    if (gameOver) return;
+
+    if (!isSaved) {
+        if (savedPiece !== null) {
+            const temp = tetromino.name;
+            tetromino = { name: savedPiece, matrix: tetrominos[savedPiece], row: -2, col: 3 }; // Set position to top center
+            savedPiece = temp;
+        } else {
+            savedPiece = tetromino.name;
+            tetromino = getNextTetromino();
+        }
+        drawSavedPiece(savedPiece);
+        isSaved = true;
+    }
+});
+
+document.getElementById('move-left').addEventListener('click', function() {
+    if (gameOver) return;
+
+    const col = tetromino.col - 1;
+    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+        tetromino.col = col;
+    }
+});
+
+document.getElementById('move-right').addEventListener('click', function() {
+    if (gameOver) return;
+
+    const col = tetromino.col + 1;
+    if (isValidMove(tetromino.matrix, tetromino.row, col)) {
+        tetromino.col = col;
+    }
+});
+
+document.getElementById('rotate-piece').addEventListener('click', function() {
+    if (gameOver) return;
+
+    const rotatedMatrix = rotate(tetromino.matrix);
+    if (isValidMove(rotatedMatrix, tetromino.row, tetromino.col)) {
+        tetromino.matrix = rotatedMatrix;
+    }
+});
+
+document.getElementById('drop-piece').addEventListener('click', function() {
+    if (gameOver) return;
+
+    while (isValidMove(tetromino.matrix, tetromino.row + 1, tetromino.col)) {
+        tetromino.row++;
+    }
+    placeTetromino();
+});
+
 // Llama a updateScoreUI() después de iniciar el juego para mostrar la puntuación inicial
 updateScoreUI();
-
 increaseSpeedWithTime(); // Inicia el aumento de velocidad con el tiempo
 rAF = requestAnimationFrame(loop);
 showNextPieces(); // Mostrar los próximos tetrominos al inicio

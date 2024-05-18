@@ -1,7 +1,7 @@
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST["email"];
-    $password = MD5($_POST["password"]);
+    $email = cleanInput($_POST["email"]);
+    $password = cleanInput(MD5($_POST["password"]));
     
     if (empty($email) || empty($password)) {
         $error = "Por favor, completa todos los campos.";
@@ -26,5 +26,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "Error: " . $e->getMessage();
         }
     }
+}
+
+
+function cleanInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    
+    return $data;
 }
 ?>
