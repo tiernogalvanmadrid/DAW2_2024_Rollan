@@ -1,9 +1,18 @@
+<?php
+session_start();
+
+if (isset($_SESSION["username"])) {
+  header("Location: usuario.php");
+  exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en" >
   <head>
     <meta charset="UTF-8">
     <title>Tetris Game</title>
     <link rel="stylesheet" href="style\style.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
   </head>
   <body>
@@ -26,6 +35,7 @@
               <input type="password" id="password" required>
               <i>Password</i>
             </div>
+            <div class="g-recaptcha" data-sitekey="6LdwOOUpAAAAAHEsXofdXZVmbptJbjA707b4uV08"></div>
             <div class="links">
               <a href="reset_password.php">Forgot Password</a>
               <a href="registro.php">Sign up</a>
@@ -39,13 +49,33 @@
   </section>
   <script>
     function submitForm() {
+      event.preventDefault();
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
+    var recaptchaResponse = grecaptcha.getResponse();
+
+    if (!email || !password || !recaptchaResponse) {
+            alert("Por favor, complete todos los campos.");
+            return;
+    }
+    if (!recaptchaResponse) {
+            alert("Por favor, complete el reCAPTCHA.");
+            return;
+    }
+    if (!email) {
+            alert("Por favor, ingresa un email.");
+            return;
+    }
+    if (!password) {
+            alert("Por favor, ingresa una contraseña.");
+            return;
+    }
 
     // Crear un objeto FormData para enviar los datos
     var formData = new FormData();
     formData.append('email', email);
     formData.append('password', password);
+    formData.append('g-recaptcha-response', recaptchaResponse);
 
     // Crear una solicitud AJAX para enviar los datos a un script PHP
     var xhr = new XMLHttpRequest();

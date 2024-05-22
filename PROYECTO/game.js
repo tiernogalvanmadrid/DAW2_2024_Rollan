@@ -7,7 +7,7 @@ function getRandomInt(min, max) {
 function generateSequence() {
     const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z'];
 
-    while (tetrominoSequence.length < 50) { // Genera más piezas de las necesarias
+    while (tetrominoSequence.length < 300) { // Genera más piezas de las necesarias
         const rand = getRandomInt(0, sequence.length - 1);
         const name = sequence[rand];
         tetrominoSequence.push(name);
@@ -25,10 +25,6 @@ function getNextTetromino() {
     const col = playfield[0].length / 2 - Math.ceil(matrix[0].length / 2);
     const row = name === 'I' ? -1 : -2;
 
-    if (tetrominoSequence.length === 0) {
-        generateSequence(); // Generar una nueva secuencia si la actual se agota
-    }
-
     return {
         name: name,
         matrix: matrix,
@@ -37,6 +33,7 @@ function getNextTetromino() {
     };
 }
 
+//5 PIEZAS POR SALIR
 function showNextPieces() {
     const nextPieceContainer = document.getElementById('nextPieceContainer');
     nextPieceContainer.innerHTML = '';
@@ -46,6 +43,7 @@ function showNextPieces() {
         const nextPieceCanvas = document.createElement('canvas');
         nextPieceCanvas.width = 100;
         nextPieceCanvas.height = 100;
+        nextPieceCanvas.className = "pie"
         const nextPieceContext = nextPieceCanvas.getContext('2d');
 
         nextPieceContext.fillStyle = colors[nextPieceName];
@@ -138,6 +136,23 @@ function showGameOver() {
     cancelAnimationFrame(rAF);
     gameOver = true;
 
+    // Enviar el score al servidor
+    fetch('procesar_puntuacion.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ score: score })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Score saved:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+    // Mostrar mensaje de GAME OVER
     context.fillStyle = 'black';
     context.globalAlpha = 0.75;
     context.fillRect(0, canvas.height / 2 - 30, canvas.width, 60);
@@ -149,12 +164,19 @@ function showGameOver() {
     context.textBaseline = 'middle';
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
     context.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 40);
+
+    // Esperar 3 segundos antes de redirigir
+    setTimeout(() => {
+        window.location.href = 'ranking_global.php';
+    }, 1000);
 }
 
+//PIEZA GUARDADA
 function drawSavedPiece(piece) {
     const savedPieceCanvas = document.createElement('canvas');
     savedPieceCanvas.width = 100;
     savedPieceCanvas.height = 100;
+    savedPieceCanvas.className = "pie";
     const savedPieceContext = savedPieceCanvas.getContext('2d');
 
     savedPieceContext.fillStyle = colors[piece];
@@ -177,7 +199,7 @@ const grid = 32;
 const tetrominoSequence = [];
 let savedPiece = null;
 let isSaved = false;
-let speed = 30; // Velocidad inicial
+let speed = 50; // Velocidad inicial
 let speedIncreaseInterval = 10000; // Incremento de velocidad cada 10 segundos
 let lastSpeedIncreaseTime = Date.now(); // Último tiempo de incremento de velocidad
 

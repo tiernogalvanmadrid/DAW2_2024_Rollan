@@ -34,17 +34,24 @@ try {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="style\style.css"> -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
     <title>Personal Area</title>
+    <style>
+        .instrucciones {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
     
     <?php include_once "header.php";?>
 
     <div class="container mt-5">
-    <h2>Ranking de tus Partidas</h2>
+    <h2>Historial de tus Partidas</h2>
     <div class="table-responsive">
         <table class="table table-striped">
             <thead>
@@ -65,7 +72,18 @@ try {
             </tbody>
         </table>
     </div>
-    <a href="tetris.php" class="btn btn-primary">Play</a>
+    <a href="tetris.php" class="btn btn-success">Jugar</a>
+    <div class="instrucciones">
+            <h3>Instrucciones del Juego</h3>
+            <p>Para jugar, sigue estos pasos:</p>
+            <ul>
+                <li>Usa las teclas de flecha para mover las piezas.</li>
+                <li>Presiona la tecla "C" para guardar e intercambiar piezas.</li>
+                <li>Presiona la tecla "Espacio" para hacer caer la pieza directamente.</li>
+                <li>Completa líneas para ganar puntos y evita que las piezas lleguen a la parte superior.</li>
+            </ul>
+            <p>¡Diviértete jugando!</p>
+        </div>
 </div>
     
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

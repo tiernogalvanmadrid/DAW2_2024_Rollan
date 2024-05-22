@@ -1,3 +1,52 @@
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $email = cleanInput($_POST["email"]);
+
+    try {
+        require_once('constantes.php');
+
+        $pdo = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("SELECT nombre_usuario, email FROM usuario WHERE email = :email");
+        $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+        $stmt->execute();
+        
+        if ($stmt->rowCount() > 0) {
+            $message_success = " Por favor revisa tu bandeja de entrada de correo electrónico o carpeta de spam y sigue los pasos.";
+            
+            // Generar la clave aleatoria
+            $key = md5(time() + 123456789 % rand(4000, 55000000));
+            
+            // Insertar esta clave temporal en la base de datos
+            $stmt = $pdo->prepare("INSERT INTO recuperar_contrasenia (email, temp_key) VALUES (:email, :temp_key)");
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->bindParam(':temp_key', $key, PDO::PARAM_STR);
+            $stmt->execute();
+            
+            // Enviar correo electrónico con la información para restablecer la contraseña
+            $to = $email;
+            $subject = 'Restablecer contraseña';
+            $msg = "Copie el enlace y péguelo en la barra de direcciones de su navegador.". "\r\n"."www.cristinarollan.es/recuperacion_reset.php?key=" . $key . "&email=" . $email;
+            $headers = 'X_Mailer: PHP/' . phpversion();
+            mail($to, $subject, $msg, $headers);
+            
+        } else {
+            $message = "¡Lo siento! No hay ninguna cuenta asociada con este email";
+        }
+    }catch (PDOException $e) {
+        echo "error: " . $e->getMessage();
+    }
+}
+
+function cleanInput($data) {
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    
+    return $data;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,48 +67,43 @@
                 <h2>Forgot Password</h2>
                 <p>Enter your email address to reset your password.</p>
                 <div class="form">
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
                         <div class="inputBox">
-                            <input type="email" name="email" required>
+                            <input type="email" id="email" name="email" required>
                             <i>Email</i>
                         </div>
                         <div class="inputBox">
-                            <input type="submit" value="Reset Password">
+                            <input type="submit" id="submit" value="Reset Password">
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
     </section>
+    <script>
+        document.getElementById('submit').addEventListener('click', function() {
+            var email = document.getElementById('email').value;
 
-    <?php
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        // Obtener el correo electrónico proporcionado por el usuario
-        $email = $_POST["email"];
+            // Crear objeto FormData para enviar los datos
+            var formData = new FormData();
+            formData.append('email', email);
 
-        // Aquí deberías validar el correo electrónico y verificar si existe en tu base de datos
+            // Enviar datos usando fetch
+            fetch(window.location.href, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(data => {
+                // Manejar la respuesta del servidor
+                console.log(data);
+                alert('Password reset link has been sent to your email.');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+            });
+        });
+    </script>
 
-        // Generar un token de restablecimiento de contraseña (puedes utilizar alguna función de hash)
-        $token = md5(uniqid(rand(), true));
 
-        // Guardar el token en tu base de datos junto con el correo electrónico y una marca de tiempo
-
-        // Enviar el correo electrónico con un enlace que incluya el token
-        $to = $email;
-        $subject = "Password Reset";
-        $message = "Click the link below to reset your password:\n\n";
-        $message .= "http://tu-sitio.com/reset_password.php?token=" . $token;
-        $headers = "From: tu-correo@tu-sitio.com";
-
-        // Enviar el correo electrónico
-        if (mail($to, $subject, $message, $headers)) {
-            // Redirigir al usuario a una página de confirmación
-            header("Location: confirmation_page.html");
-            exit();
-        } else {
-            echo "Error: Unable to send reset link.";
-        }
-    }
-    ?>
 </body>
 </html>
