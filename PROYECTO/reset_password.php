@@ -51,7 +51,7 @@ function cleanInput($data) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reset Password</title>
+    <title>Recuperar contraseña</title>
     <link rel="stylesheet" href="style\style3.css">
 </head>
 <body>
@@ -64,15 +64,16 @@ function cleanInput($data) {
         ?>
         <div class="signin">
             <div class="content">
-                <h2>Forgot Password</h2>
-                <p>Enter your email address to reset your password.</p>
+                <h1>Tetris</h1>
+                <h2>Recuperar contraseña</h2>
+                <p>Ingrese su correo electrónico para restablecer su contraseña.</p>
                 <div class="form">
                         <div class="inputBox">
                             <input type="email" id="email" name="email" required>
                             <i>Email</i>
                         </div>
                         <div class="inputBox">
-                            <input type="submit" id="submit" value="Reset Password">
+                            <input type="submit" id="submit" value="Recuperar contraseña">
                         </div>
                 </div>
             </div>
@@ -95,11 +96,11 @@ function cleanInput($data) {
             .then(data => {
                 // Manejar la respuesta del servidor
                 console.log(data);
-                alert('Password reset link has been sent to your email.');
+                alert('Se ha enviado el enlace para restablecer la contraseña a su correo electrónico.');
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('There was an error. Please try again.');
+                alert('Hubo un error. Inténtalo de nuevo.');
             });
         });
     </script>

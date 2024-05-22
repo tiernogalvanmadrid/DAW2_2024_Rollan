@@ -25,7 +25,7 @@ if (isset($_SESSION["username"])) {
     ?>
       <div class="signin">
         <div class="content">
-          <h2>Sign In</h2>
+        <h1>Tetris</h1>
           <div class="form">
             <div class="inputBox">
               <input type="email" id="email" required>
@@ -33,15 +33,15 @@ if (isset($_SESSION["username"])) {
             </div>
             <div class="inputBox">
               <input type="password" id="password" required>
-              <i>Password</i>
+              <i>Contraseña</i>
             </div>
             <div class="g-recaptcha" data-sitekey="6LdwOOUpAAAAAHEsXofdXZVmbptJbjA707b4uV08"></div>
-            <div class="links">
-              <a href="reset_password.php">Forgot Password</a>
-              <a href="registro.php">Sign up</a>
-            </div>
             <div class="inputBox">
-              <input type="submit" value="Log in" onclick="submitForm()">            
+              <input type="submit" value="Iniciar sesión" onclick="submitForm()">            
+              <div class="links">
+                <a href="reset_password.php">Recuperar contraseña</a>
+                <a href="registro.php">Crear Cuenta</a>
+              </div>
             </div>
           </div>
         </div>
