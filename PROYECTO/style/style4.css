@@ -36,7 +36,7 @@ section::before
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	background: linear-gradient(#000,#00ffff,#000);
+	background: linear-gradient(#000,#ffff00,#000);
 	animation: animate 5s linear infinite;
 }
 @keyframes animate 
@@ -62,7 +62,7 @@ section span
 }
 section span:hover 
 {
-	background: #00ffff;
+	background: #ffff00;
 	transition: 0s;
 }
 
@@ -87,12 +87,12 @@ section .signin .content
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	gap: 20px; /* PARA QUE QUEPA TETRIS*/
+	gap: 40px;
 }
 section .signin .content h2 
 {
-	font-size: 1.5em;
-	color: #00ffff;
+	font-size: 2em;
+	color: #ffff00;
 	text-transform: uppercase;
 }
 section .signin .content h1 
@@ -105,11 +105,6 @@ section .signin .content h1
     background-clip: text;
     -webkit-text-stroke: 1px white;
     -webkit-text-fill-color: transparent;
-}
-section .signin .content h5 
-{
-	color: white;
-	/* text-transform: uppercase; */
 }
 section .signin .content .form 
 {
@@ -167,21 +162,18 @@ section .signin .content .form .inputBox i
 }
 .signin .content .form .links a:nth-child(2)
 {
-	color: #00ffff;
+	color: #ffff00;
 	font-weight: 600;
 }
 .signin .content .form .inputBox input[type="submit"]
 {
 	padding: 10px;
-	background: #00ffff;
+	background: #ffff00;
 	color: #000;
 	font-weight: 600;
 	font-size: 1.35em;
 	letter-spacing: 0.05em;
 	cursor: pointer;
-}
-.privacy {
-	color: white;
 }
 .g-recaptcha { 
     margin-left: 3%;

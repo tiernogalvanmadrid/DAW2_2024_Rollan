@@ -30,6 +30,9 @@ section
 	flex-wrap: wrap;
 	overflow: hidden;
 }
+.g-recaptcha { 
+    margin-left: 3%;
+}
 section::before 
 {
 	content: '';
@@ -91,9 +94,20 @@ section .signin .content
 }
 section .signin .content h2 
 {
-	font-size: 2em;
+	font-size: 1.5em;
 	color: #ff00ff;
 	text-transform: uppercase;
+}
+section .signin .content h1 
+{
+	font-size: 4em;
+    text-transform: uppercase;
+    background: linear-gradient(to right, 
+	purple, blue, cyan, green, yellow, orange, red);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-stroke: 1px white;
+    -webkit-text-fill-color: transparent;
 }
 section .signin .content .form 
 {

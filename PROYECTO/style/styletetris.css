@@ -84,7 +84,26 @@ html, body {
         bottom: 10px;
         width: 100%;
     }
+
 }
+@media only screen and (max-width: 600px) {
+  .pie, .next-text{
+    width: 50%;
+    font-size: 50%;
+  }
+  .score{
+    font-size: 50%;
+  }
+  /* body{
+    width: 50%;
+  } */
+
+  #game {
+    width: 50%;
+  }
+  
+}
+
 
 #controls button {
     padding: 10px;
