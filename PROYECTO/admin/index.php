@@ -11,7 +11,7 @@ if (isset($_SESSION["admin_name"])) {
   <head>
     <meta charset="UTF-8">
     <title>Administrador</title>
-    <link rel="icon" href="style\favicon.ico" type="image/x-icon">
+    <link rel="icon" href="..\style\favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="..\style\style4.css">
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
   </head>

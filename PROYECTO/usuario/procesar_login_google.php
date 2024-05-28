@@ -7,7 +7,7 @@ if (!isset($_POST['credential'])) {
 }
 
 $token = $_POST['credential'];
-$client_id = "440042372836-q9abim7l91sfe0fgss1m6bqq1ait4v87.apps.googleusercontent.com";
+$client_id = "440042372836-l1dls17m5qeo31l8mesujiee4aqsb45r.apps.googleusercontent.com";
 
 $ch = curl_init();
 curl_setopt($ch, CURLOPT_URL, "https://oauth2.googleapis.com/tokeninfo?id_token=" . $token);

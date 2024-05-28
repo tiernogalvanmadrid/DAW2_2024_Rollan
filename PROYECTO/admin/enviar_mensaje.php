@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         foreach ($usuarios as $email) {
             $to = $email;
-            $headers = 'X-Mailer: PHP/' . phpversion();
+            $headers = 'From: cristinarollan@cristinarollan.es' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
             
             if (mail($to, $subject, $message, $headers)) {
                 $message_status[] = "Mensaje enviado a: " . htmlspecialchars($email);

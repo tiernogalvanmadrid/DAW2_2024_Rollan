@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: db5015831001.hosting-data.io
--- Tiempo de generación: 25-05-2024 a las 23:04:53
+-- Tiempo de generación: 28-05-2024 a las 19:45:15
 -- Versión del servidor: 8.0.32
 -- Versión de PHP: 7.4.33
 
@@ -40,7 +40,8 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id_super_usuario`, `email`, `contrasenia`, `nombre`) VALUES
-(1, 'c-rollan@hotmail.es', '81dc9bdb52d04dc20036dbd8313ed055', 'Cristina Admin');
+(1, 'c-rollan@hotmail.es', '81dc9bdb52d04dc20036dbd8313ed055', 'Cristina Admin'),
+(2, 'prueba@prueba.com', '81dc9bdb52d04dc20036dbd8313ed055', 'Admin Prueba');
 
 -- --------------------------------------------------------
 
@@ -63,9 +64,6 @@ INSERT INTO `partida` (`id_partida`, `id_usuario`, `puntuaje_total`, `fecha`) VA
 (13, 16, 900, '2024-05-18 19:41:33'),
 (17, 19, 3900, '2024-05-18 20:17:15'),
 (18, 16, 5500, '2024-05-19 15:30:32'),
-(19, 23, 0, '2024-05-19 15:47:23'),
-(20, 23, 0, '2024-05-19 15:48:43'),
-(21, 23, 300, '2024-05-19 15:50:04'),
 (23, 19, 2800, '2024-05-19 16:09:06'),
 (24, 25, 2900, '2024-05-19 16:49:49'),
 (25, 25, 4400, '2024-05-19 16:54:23'),
@@ -81,13 +79,10 @@ INSERT INTO `partida` (`id_partida`, `id_usuario`, `puntuaje_total`, `fecha`) VA
 (38, 16, 5700, '2024-05-19 20:06:56'),
 (39, 16, 6400, '2024-05-19 20:14:10'),
 (40, 16, 6300, '2024-05-19 20:20:00'),
-(41, 26, 0, '2024-05-20 07:12:31'),
 (42, 27, 0, '2024-05-20 07:58:56'),
 (43, 27, 100, '2024-05-20 07:59:32'),
 (44, 27, 0, '2024-05-20 08:02:10'),
-(45, 24, 0, '2024-05-20 08:17:59'),
 (46, 16, 3100, '2024-05-20 08:33:58'),
-(47, 28, 200, '2024-05-20 09:26:34'),
 (48, 16, 2500, '2024-05-20 11:03:53'),
 (49, 16, 900, '2024-05-20 11:29:56'),
 (50, 16, 3300, '2024-05-20 11:32:54'),
@@ -97,16 +92,11 @@ INSERT INTO `partida` (`id_partida`, `id_usuario`, `puntuaje_total`, `fecha`) VA
 (54, 16, 5700, '2024-05-20 13:18:41'),
 (55, 16, 6500, '2024-05-20 13:25:01'),
 (56, 16, 6600, '2024-05-20 13:49:10'),
-(57, 17, 100, '2024-05-20 14:43:05'),
 (58, 30, 300, '2024-05-20 17:05:51'),
-(59, 33, 3500, '2024-05-21 17:30:47'),
 (60, 36, 500, '2024-05-21 17:49:05'),
 (61, 36, 1800, '2024-05-21 17:52:11'),
 (62, 16, 9200, '2024-05-21 17:56:03'),
-(63, 23, 800, '2024-05-21 17:59:31'),
-(64, 23, 200, '2024-05-21 18:00:36'),
 (65, 36, 6000, '2024-05-21 18:00:59'),
-(66, 23, 1200, '2024-05-21 18:03:33'),
 (67, 36, 4800, '2024-05-21 18:06:16'),
 (68, 37, 200, '2024-05-21 19:09:12'),
 (69, 16, 12400, '2024-05-21 19:54:29'),
@@ -132,7 +122,29 @@ INSERT INTO `partida` (`id_partida`, `id_usuario`, `puntuaje_total`, `fecha`) VA
 (95, 32, 1700, '2024-05-25 16:30:56'),
 (96, 32, 1500, '2024-05-25 16:38:15'),
 (97, 16, 700, '2024-05-25 20:51:30'),
-(98, 16, 0, '2024-05-25 20:54:06');
+(98, 16, 0, '2024-05-25 20:54:06'),
+(100, 16, 8900, '2024-05-26 17:20:58'),
+(101, 16, 8800, '2024-05-26 17:29:07'),
+(102, 16, 10000, '2024-05-26 17:37:37'),
+(103, 16, 9700, '2024-05-26 17:45:56'),
+(104, 16, 10900, '2024-05-26 17:55:40'),
+(105, 16, 7500, '2024-05-26 18:02:20'),
+(106, 16, 0, '2024-05-28 10:44:49'),
+(107, 16, 100, '2024-05-28 10:55:21'),
+(108, 16, 0, '2024-05-28 10:59:05'),
+(109, 16, 0, '2024-05-28 11:00:43'),
+(110, 16, 0, '2024-05-28 11:06:18'),
+(111, 19, 1300, '2024-05-28 11:24:38'),
+(112, 16, 0, '2024-05-28 14:08:16'),
+(113, 45, 3800, '2024-05-28 15:28:50'),
+(116, 19, 0, '2024-05-28 19:09:32'),
+(117, 19, 0, '2024-05-28 19:14:05'),
+(118, 19, 0, '2024-05-28 19:16:57'),
+(119, 19, 0, '2024-05-28 19:20:32'),
+(120, 19, 0, '2024-05-28 19:26:38'),
+(121, 19, 0, '2024-05-28 19:28:10'),
+(122, 19, 3000, '2024-05-28 19:33:02'),
+(123, 19, 0, '2024-05-28 19:34:03');
 
 -- --------------------------------------------------------
 
@@ -168,29 +180,23 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nombre_usuario`, `email`, `contrasenia`, `bloqueado`, `validado`) VALUES
-(16, 'Cristina Rollan', 'c-rollan@hotmail.es', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0),
-(17, 'tuxboy', 'mateo@hola.es', '827ccb0eea8a706c4c34a16891f84e7b', 0, 0),
+(16, 'Cristina', 'c-rollan@hotmail.es', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0),
 (19, 'Marchio', 'mariofer_303@hotmail.com', '1be6c35eb029bb62399a53f9c908686b', 0, 0),
-(23, 'Alex', 'alex@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0),
-(24, 'ilias', 'elias@gmail.com', 'a722c63db8ec8625af6cf71cb8c2d939', 0, 0),
 (25, 'Ironh3ad', 'ironhead_furiaeterna@hotmail.com', '46104f9c08c4552561f94a524ea68b8e', 0, 0),
-(26, 'hugo', 'aaaa@gmail.com', '202cb962ac59075b964b07152d234b70', 0, 0),
 (27, 'Rosita11', 'nataly.guanoluisa95@gmail.com', 'b4f4e97b13b2d638dea366532de32fea', 0, 0),
-(28, 'jooweeel', 'joel@gmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 0, 0),
 (29, 'Cristinat', 'macrtrsa97@gmail.com', 'f4020e91252aafd4b18d8acd17f883db', 0, 0),
 (30, 'Zhor', 'thor.pedo@gmail.com', '5bca0a712fb2b099312ebfef594f6a84', 0, 0),
 (32, 'Emilio', 'logeloki@gmail.com', '256d23053d4749dc0d1e28433f878254', 0, 0),
-(33, 'ElMejor', 'fdafaf@gmail.com', 'bb020008565b6844c327ccd4c6fac766', 0, 0),
 (34, 'barroso347', 'barroso347@gmail.com', '32250170a0dca92d53ec9624f336ca24', 0, 0),
 (35, 'Kal', 'kalef.villanueva@gmail.com', 'b65cb28b7c2569d90631cef9c8a8c29e', 0, 0),
 (36, 'jeanpier', 'je5x.1.jnes@gmail.com', '25f9e794323b453885f5181f1b624d0b', 0, 0),
 (37, 'PEDRO', 'ferucepe@yahoo.es', 'b969da0ea42c2c0eb01a2f405c9b4f1c', 0, 0),
-(38, 'Julian', 'julian@hotmail.com', '827ccb0eea8a706c4c34a16891f84e7b', 0, 0),
 (40, 'Bombardero89', 'carlosalejandropolit@gmail.com', '4380e6494cdda79d2ba1aa31e0aa6917', 0, 0),
 (43, 'cuenta baneable', 'cuentabaneable0@gmail.com', '', 0, 0),
 (44, 'eduardo', 'eduardo.gomez43@educa.madrid.org', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0),
 (45, 'mariam piccetti', 'rosalblue2004@gmail.com', '', 0, 0),
-(49, 'Cristina2', 'rollancristina@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0);
+(49, 'Cristina2', 'rollancristina@gmail.com', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0),
+(50, 'Usuario Prueba', 'prueba@prueba.com', '81dc9bdb52d04dc20036dbd8313ed055', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -248,25 +254,25 @@ ALTER TABLE `validacion_usuario`
 -- AUTO_INCREMENT de la tabla `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id_super_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_super_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `id_partida` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id_partida` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
 
 --
 -- AUTO_INCREMENT de la tabla `recuperar_contrasenia`
 --
 ALTER TABLE `recuperar_contrasenia`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id_usuario` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `validacion_usuario`

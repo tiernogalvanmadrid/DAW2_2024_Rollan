@@ -45,7 +45,7 @@ if (isset($_SESSION["username"])) {
             </div>
           </div>
           <div id="g_id_onload"
-            data-client_id="440042372836-q9abim7l91sfe0fgss1m6bqq1ait4v87.apps.googleusercontent.com"
+            data-client_id="440042372836-l1dls17m5qeo31l8mesujiee4aqsb45r.apps.googleusercontent.com"
             data-context="signin"
             data-ux_mode="popup"
             data-callback="handleCredentialResponse"

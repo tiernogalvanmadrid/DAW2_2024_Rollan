@@ -165,7 +165,7 @@ function showGameOver() {
     context.fillText('GAME OVER!', canvas.width / 2, canvas.height / 2);
     context.fillText('Score: ' + score, canvas.width / 2, canvas.height / 2 + 40);
 
-    // Esperar 3 segundos antes de redirigir
+    // Esperar 1 segundos antes de redirigir
     setTimeout(() => {
         window.location.href = 'ranking_global.php';
     }, 1000);
@@ -433,6 +433,7 @@ document.getElementById('drop-piece').addEventListener('click', function() {
     }
     placeTetromino();
 });
+
 
 // Llama a updateScoreUI() después de iniciar el juego para mostrar la puntuación inicial
 updateScoreUI();

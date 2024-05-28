@@ -57,7 +57,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $to = $email;
                     $subject = 'Confirmación de registro';
                     $msg = "Copie el enlace y péguelo en la barra de direcciones de su navegador.". "\r\n"."https://www.cristinarollan.es/registro/validar_ingreso.php?key=" . $key . "&email=" . $email;
-                    $headers = 'X_Mailer: PHP/' . phpversion();
+                    $headers = 'From: cristinarollan@cristinarollan.es' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
                     mail($to, $subject, $msg, $headers);
                     echo "OK";
                 } else {

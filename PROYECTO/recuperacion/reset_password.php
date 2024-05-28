@@ -38,7 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $to = $email;
                     $subject = 'Restablecer contraseña';
                     $msg = "Copie el enlace y péguelo en la barra de direcciones de su navegador.". "\r\n"."www.cristinarollan.es/recuperacion/recuperacion_reset.php?key=" . $key . "&email=" . $email;
-                    $headers = 'X_Mailer: PHP/' . phpversion();
+                    $headers = 'From: cristinarollan@cristinarollan.es' . "\r\n" . 'X-Mailer: PHP/' . phpversion();
                     mail($to, $subject, $msg, $headers);
                     echo "success";
                     exit();
