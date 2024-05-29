@@ -1,5 +1,4 @@
 <?php
-
 try {
     require_once '../parts/constantes.php';
     $pdo = new PDO(DSN, DB_USERNAME, DB_PASSWORD, array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));

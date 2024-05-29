@@ -14,7 +14,7 @@ try {
   $stmt = $pdo->query("SELECT id_usuario, nombre_usuario, email, fecha_registro, bloqueado, validado FROM usuario");
   $usuarios = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  // Obtener usuarios con el mayor puntaje
+  // Obtener usuarios con el mayor puntuaje
   $stmt = $pdo->query("
       SELECT u.id_usuario, u.nombre_usuario, MAX(p.puntuaje_total) AS max_puntuaje
       FROM usuario u
@@ -32,6 +32,7 @@ try {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
     <link rel="icon" href="..\style\favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">

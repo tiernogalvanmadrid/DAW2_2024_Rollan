@@ -6,13 +6,10 @@ if (!isset($_SESSION["username"])) {
     exit();
 }
 
-// Incluir archivo de conexión a la base de datos
-
 $id_usuario = $_SESSION["id_usuario"];
 
 try {
     require_once '../parts/constantes.php';
-    // Conexión a la base de datos
     $pdo = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -24,7 +21,7 @@ try {
     $lastScore = $stmtLastScore->fetch(PDO::FETCH_ASSOC);
     $lastScoreValue = $lastScore ? $lastScore['puntuaje_total'] : 'No hay partidas registradas';
 
-    // Consulta para obtener los 10 mejores jugadores sin repetirse
+    // Consulta para obtener los 10 mejores jugadores
     $query = "
         SELECT p.id_usuario, u.nombre_usuario, MAX(p.puntuaje_total) as max_puntuaje
         FROM partida p
@@ -36,7 +33,6 @@ try {
     $stmt->execute();
     $ranking = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // Manejar errores de la consulta
     echo "Error al obtener el ranking: " . $e->getMessage();
     exit();
 }

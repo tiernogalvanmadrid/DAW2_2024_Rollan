@@ -43,7 +43,6 @@ if (isset($_GET['key']) && isset($_GET['email'])) {
         exit;
     } catch (PDOException $e) {
         // Revertir la transacción en caso de error
-        
         if ($pdo->inTransaction()) {
             $pdo->rollBack();
         }

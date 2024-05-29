@@ -10,6 +10,7 @@ if (isset($_SESSION["admin_name"])) {
 <html lang="en" >
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administrador</title>
     <link rel="icon" href="..\style\favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="..\style\style4.css">
@@ -18,7 +19,7 @@ if (isset($_SESSION["admin_name"])) {
   <body>
     <section>
     <?php
-      $num_squares = 700; // Define el número de cuadrados
+      $num_squares = 700;
       for ($i = 0; $i < $num_squares; $i++) {
         echo '<span></span>';
       }

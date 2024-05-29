@@ -2,7 +2,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = cleanInput($_POST["email"]);
 
-    // Comprueba si el formato de correo electrónico es válido en el servidor
+    // Comprueba si el formato de correo electrónico es válido en servidor
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $message = "¡Por favor, introduce un correo electrónico válido!";
     } else {
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "account_not_validated";
                     exit();
                 } else {                
-                    // Generar la clave aleatoria
+                    // Generar token
                     $key = md5(time() + 123456789 % rand(4000, 55000000));
                     
                     // Insertar esta clave temporal en la base de datos
@@ -66,6 +66,7 @@ function cleanInput($data) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar contraseña</title>
     <link rel="icon" href="..\style\favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="..\style\style3.css">
@@ -73,7 +74,7 @@ function cleanInput($data) {
 <body>
     <section>
         <?php
-        $num_squares = 700; // Define el número de cuadrados
+        $num_squares = 700;
         for ($i = 0; $i < $num_squares; $i++) {
             echo '<span></span>';
         }

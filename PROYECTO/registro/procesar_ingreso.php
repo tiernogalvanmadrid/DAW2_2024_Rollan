@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     echo "email_exists";
                 }
             } else {
-                // Generar la clave aleatoria
+                // Generar token
                 $key = md5(time() + 123456789 % rand(4000, 55000000));
                 
                 // Insertar nuevo usuario
@@ -46,7 +46,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $stmt->bindParam(':password', $password1, PDO::PARAM_STR);
                 $stmt->execute();
 
-                // Insertar clave temporal en la base de datos
+                // Insertar token en la base de datos
                 $sql = "INSERT INTO validacion_usuario (email, temp_key) VALUES (:email, :temp_key)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':email', $email, PDO::PARAM_STR);

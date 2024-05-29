@@ -1,7 +1,6 @@
 document.getElementById('submit').addEventListener('click', function() {
     var email = document.getElementById('email').value;
 
-    // Comprueba si el formato de correo electrónico es válido en el cliente
     var re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
     if (!re.test(email)) {
         alert('¡Por favor, introduce un correo electrónico válido!');

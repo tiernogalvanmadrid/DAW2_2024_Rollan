@@ -5,15 +5,12 @@ if (!isset($_SESSION["username"])) {
     header("Location: ../index.php");
     exit();
 }
-
-// Incluir archivo de conexión a la base de datos
 require_once '../parts/constantes.php';
 
 // Obtener el ID de usuario del usuario actual
 $id_usuario = $_SESSION["id_usuario"];
 
 try {
-    // Conexión a la base de datos
     $pdo = new PDO(DSN, DB_USERNAME, DB_PASSWORD);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -24,7 +21,6 @@ try {
     $stmt->execute();
     $partidas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
-    // Manejar errores de la consulta
     echo "Error al obtener las partidas: " . $e->getMessage();
     exit();
 }
