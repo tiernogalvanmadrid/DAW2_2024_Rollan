@@ -20,7 +20,7 @@ if (isset($_SESSION["username"])) {
 <body>
   <section>
     <?php
-      $num_squares = 700; // Define el número de cuadrados
+      $num_squares = 700;
       for ($i = 0; $i < $num_squares; $i++) {
         echo '<span></span>';
       }

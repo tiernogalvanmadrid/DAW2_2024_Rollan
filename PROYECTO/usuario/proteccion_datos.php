@@ -85,7 +85,9 @@
   <h4>Comunicaciones comerciales:</h4>
   <p>En aplicación de la LSSI, Cristina Rollan no enviará comunicaciones publicitarias o promocionales por correo electrónico u otro medio de comunicación electrónica equivalente que previamente no hubieran sido solicitadas o expresamente autorizadas por los destinatarios de las mismas. En el caso de usuarios con los que exista una relación contractual previa, Cristina Rollan sí está autorizado al envío de comunicaciones comerciales referentes a productos o servicios de Cristina Rollan que sean similares a los que inicialmente fueron objeto de contratación con el cliente. En todo caso, el usuario, tras acreditar su identidad, podrá solicitar que no se le haga llegar más información comercial a través de los canales de Atención al Cliente.</p>
 </div>
-
+<footer>
+  <?php include_once('../parts/footer.php');?>
+</footer>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
